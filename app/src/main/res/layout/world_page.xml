@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/head"
+            layout="@layout/head" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What do you want to do?" />
+
+        <Button
+            android:id="@+id/cook_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Cook" />
+
+        <Button
+            android:id="@+id/inventory_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Inventory" />
+
+        <Button
+            android:id="@+id/market_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Market" />
+
+        <Button
+            android:id="@+id/explore_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Explore" />
+
+        <Button
+            android:id="@+id/quest_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quest" />
+    </LinearLayout>
+</layout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="quest"
+            type="com.green.zarryrpg.data.Quest" />
+
+        <variable
+            name="clickListener"
+            type="com.green.zarryrpg.MuggleQuestPageAdaptor.QuestListener" />
+    </data>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:onClick="@{() -> clickListener.onClick(quest)}">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:text="name"
+            app:nameString="@{quest}" />
+
+    </LinearLayout>
+</layout>
+

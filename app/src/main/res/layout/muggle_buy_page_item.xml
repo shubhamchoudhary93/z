@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="inventory"
+            type="com.green.zarryrpg.data.Inventory" />
+
+        <variable
+            name="clickListener"
+            type="com.green.zarryrpg.MuggleBuyPageAdaptor.InventoryListener" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:onClick="@{() -> clickListener.onClick(inventory)}">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:nameString="@{inventory}" />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text=" ("/>
+        <TextView
+            android:id="@+id/quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:quantityString="@{inventory}" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=") Cost: "/>
+        <TextView
+            android:id="@+id/cost"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            app:costString="@{inventory}" />
+
+    </LinearLayout>
+</layout>
+

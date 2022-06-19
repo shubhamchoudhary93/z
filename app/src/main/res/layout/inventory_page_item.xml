@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="inventory"
+            type="com.green.zarryrpg.data.Inventory" />
+
+        <variable
+            name="clickListener"
+            type="com.green.zarryrpg.InventoryPageAdaptor.InventoryListener" />
+    </data>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:onClick="@{() -> clickListener.onClick(inventory)}">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:text="name"
+            app:nameString="@{inventory}" />
+
+        <TextView
+            android:id="@+id/quantity"
+            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:text="inventory"
+            app:quantityString="@{inventory}" />
+    </LinearLayout>
+</layout>
+

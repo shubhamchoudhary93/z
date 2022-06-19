@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/startPageFragment">
+
+    <fragment
+        android:id="@+id/startPageFragment"
+        android:name="com.green.zarryrpg.StartPageFragment"
+        android:label="StartPageFragment"
+        tools:layout="@layout/start_page">
+        <action
+            android:id="@+id/action_startPageFragment_to_muggleWorldPageFragment"
+            app:destination="@id/muggleWorldPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/muggleWorldPageFragment"
+        android:name="com.green.zarryrpg.WorldPageFragment"
+        android:label="MuggleWorldPageFragment"
+        tools:layout="@layout/world_page">
+        <action
+            android:id="@+id/action_muggleWorldPageFragment_to_muggleCookPageFragment"
+            app:destination="@id/muggleCookPageFragment" />
+        <action
+            android:id="@+id/action_muggleWorldPageFragment_to_muggleInventoryPageFragment"
+            app:destination="@id/inventoryPageFragment" />
+        <action
+            android:id="@+id/action_muggleWorldPageFragment_to_muggleMarketPageFragment"
+            app:destination="@id/muggleMarketPageFragment" />
+        <action
+            android:id="@+id/action_muggleWorldPageFragment_self"
+            app:destination="@id/muggleWorldPageFragment" />
+        <action
+            android:id="@+id/action_muggleWorldPageFragment_to_muggleExplorePageFragment"
+            app:destination="@id/muggleExplorePageFragment" />
+        <action
+            android:id="@+id/action_muggleWorldPageFragment_to_muggleQuestPageFragment"
+            app:destination="@id/muggleQuestPageFragment" />
+        <argument
+            android:name="muggle"
+            app:argType="boolean"
+            android:defaultValue="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/muggleCookPageFragment"
+        android:name="com.green.zarryrpg.MuggleCookPageFragment"
+        android:label="MuggleCookPageFragment"
+        tools:layout="@layout/muggle_cook_page" >
+        <argument
+            android:name="muggle"
+            app:argType="boolean"
+            android:defaultValue="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/inventoryPageFragment"
+        android:name="com.green.zarryrpg.InventoryPageFragment"
+        android:label="InventoryPageFragment"
+        tools:layout="@layout/inventory_page" >
+        <argument
+            android:name="muggle"
+            app:argType="boolean"
+            android:defaultValue="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/muggleMarketPageFragment"
+        android:name="com.green.zarryrpg.MarketPageFragment"
+        android:label="MuggleMarketPageFragment"
+        tools:layout="@layout/market_page">
+        <action
+            android:id="@+id/action_muggleMarketPageFragment_to_muggleBuyPageFragment"
+            app:destination="@id/muggleBuyPageFragment" />
+        <action
+            android:id="@+id/action_muggleMarketPageFragment_to_muggleSellPageFragment"
+            app:destination="@id/muggleSellPageFragment" />
+        <argument
+            android:name="muggle"
+            app:argType="boolean"
+            android:defaultValue="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/muggleBuyPageFragment"
+        android:name="com.green.zarryrpg.MuggleBuyPageFragment"
+        android:label="MuggleBuyPageFragment"
+        tools:layout="@layout/muggle_buy_page" >
+        <argument
+            android:name="muggle"
+            app:argType="boolean"
+            android:defaultValue="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/muggleSellPageFragment"
+        android:name="com.green.zarryrpg.MuggleSellPageFragment"
+        android:label="MuggleSellPageFragment"
+        tools:layout="@layout/muggle_sell_page" >
+        <argument
+            android:name="muggle"
+            app:argType="boolean"
+            android:defaultValue="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/muggleExploreHousePageFragment"
+        android:name="com.green.zarryrpg.MuggleExploreHousePageFragment"
+        android:label="MuggleExploreHousePageFragment"
+        tools:layout="@layout/muggle_explore_house_page" >
+        <argument
+            android:name="muggle"
+            app:argType="boolean"
+            android:defaultValue="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/muggleExplorePageFragment"
+        android:name="com.green.zarryrpg.MuggleExplorePageFragment"
+        android:label="MuggleExplorePageFragment"
+        tools:layout="@layout/muggle_explore_page">
+        <action
+            android:id="@+id/action_muggleExplorePageFragment_to_muggleExploreHousePageFragment"
+            app:destination="@id/muggleExploreHousePageFragment" />
+        <argument
+            android:name="muggle"
+            app:argType="boolean"
+            android:defaultValue="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/muggleQuestPageFragment"
+        android:name="com.green.zarryrpg.MuggleQuestPageFragment"
+        android:label="MuggleQuestPageFragment"
+        tools:layout="@layout/muggle_quest_page">
+        <action
+            android:id="@+id/action_muggleQuestPageFragment_to_muggleQuestDetailsPageFragment"
+            app:destination="@id/muggleQuestDetailsPageFragment" />
+        <argument
+            android:name="muggle"
+            app:argType="boolean"
+            android:defaultValue="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/muggleQuestDetailsPageFragment"
+        android:name="com.green.zarryrpg.MuggleQuestDetailsPageFragment"
+        android:label="MuggleQuestDetailsPageFragment"
+        tools:layout="@layout/muggle_quest_details_page">
+        <argument
+            android:name="id"
+            android:defaultValue="0L"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_muggleQuestDetailsPageFragment_to_muggleQuestPageFragment"
+            app:destination="@id/muggleQuestPageFragment" />
+    </fragment>
+</navigation>

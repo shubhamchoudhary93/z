@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
+        <include
+            android:id="@+id/head"
+            layout="@layout/head"/>
+        <LinearLayout
+            android:id="@+id/sell_Button_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:orientation="horizontal"
+            android:layout_marginRight="5dp">
+
+            <TextView
+                android:id="@+id/inventory_selected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Max :"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:id="@+id/max_inventory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp" />
+
+            <EditText
+                android:id="@+id/quantity_sell"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="50dp"
+                android:layout_marginRight="50dp" />
+
+            <Button
+                android:id="@+id/sell_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sell" />
+
+        </LinearLayout>
+
+
+        <ScrollView
+            android:id="@+id/inventory_scrollview"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        </ScrollView>
+    </LinearLayout>
+</layout>
