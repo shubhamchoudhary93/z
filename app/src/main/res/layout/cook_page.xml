@@ -1,53 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <LinearLayout style="@style/general_outer_linear_layout_vertical">
+
         <include
             android:id="@+id/head"
-            layout="@layout/head"/>
+            layout="@layout/head" />
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/head_question_text"
             android:text="Let's cook something. Select a slot." />
 
         <Button
             android:id="@+id/cook_one"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/general_button"
             android:layout_marginTop="20dp"
             android:text="Cook One" />
 
         <Button
             android:id="@+id/cook_two"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/general_button"
             android:text="Cook Two" />
 
         <LinearLayout
             android:id="@+id/cook_page"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical">
+            style="@style/general_linear_layout_vertical"
+            android:layout_marginTop="20dp">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/head_question_text"
                 android:text="Select a Item to be cooked."
                 android:textSize="16dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+            <LinearLayout style="@style/general_linear_layout_horizontal">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                <LinearLayout style="@style/general_linear_layout_vertical">
 
                     <Spinner
                         android:id="@+id/item_dropdown"
@@ -56,10 +43,9 @@
                         android:layout_marginTop="10dp" />
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                        style="@style/general_linear_layout_horizontal"
+                        android:gravity="center">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

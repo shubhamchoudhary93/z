@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:orientation="vertical">
+    <LinearLayout style="@style/general_outer_linear_layout_vertical">
+
         <include
             android:id="@+id/head"
-            layout="@layout/head"/>
-        <Button
-            android:id="@+id/buy_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Buy"/>
+            layout="@layout/head" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sell"
-            android:id="@+id/sell_button"/>
+            android:id="@+id/buy_button"
+            style="@style/general_button"
+            android:text="Buy" />
+
+        <Button
+            android:id="@+id/sell_button"
+            style="@style/general_button"
+            android:text="Sell" />
     </LinearLayout>
 </layout>

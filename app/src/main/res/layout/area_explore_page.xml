@@ -2,51 +2,45 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:orientation="vertical">
+        style="@style/general_outer_linear_layout_vertical">
+
         <include
             android:id="@+id/head"
-            layout="@layout/head"/>
+            layout="@layout/head" />
+
         <Button
             android:id="@+id/explore_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/explore_button"
             android:text="Explore" />
 
         <TextView
             android:id="@+id/explore_cost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cost : 1 stamina" />
+            android:layout_gravity="right"
+            android:text="Cost : 1 stamina"
+            android:textSize="10dp" />
 
         <LinearLayout
             android:id="@+id/finding_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            style="@style/general_linear_layout_horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/head_question_text"
                 android:text="You found " />
 
             <TextView
                 android:id="@+id/finding"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                style="@style/head_question_text"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical">
+            style="@style/general_linear_layout_vertical"
+            android:layout_marginTop="20dp">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/head_question_text"
                 android:text="What can you find :" />
 
             <TextView

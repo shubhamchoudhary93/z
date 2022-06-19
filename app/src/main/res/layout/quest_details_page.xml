@@ -1,64 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:orientation="vertical">
+    <LinearLayout style="@style/general_outer_linear_layout_vertical">
 
         <include
             android:id="@+id/head"
             layout="@layout/head" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+        <LinearLayout style="@style/general_linear_layout_vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+            <TextView
+                android:id="@+id/name"
+                style="@style/head_question_text" />
 
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="name" />
+            <TextView
+                android:id="@+id/detail"
+                style="@style/head_question_text"
+                android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+            <LinearLayout style="@style/general_linear_layout_horizontal">
 
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="details" />
-
-                <TextView
-                    android:id="@+id/detail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="requirements" />
+                    android:text="What we need: " />
 
                 <TextView
                     android:id="@+id/requirements"
@@ -68,14 +33,15 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                style="@style/general_linear_layout_horizontal"
+                android:layout_marginTop="50dp">
 
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="rewards" />
+                    android:text="Rewards"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/rewards"
@@ -84,10 +50,11 @@
 
             </LinearLayout>
         </LinearLayout>
+
         <Button
             android:id="@+id/collect"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="collect"/>
+            style="@style/general_button"
+            android:layout_marginTop="50dp"
+            android:text="collect" />
     </LinearLayout>
 </layout>

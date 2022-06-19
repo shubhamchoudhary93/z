@@ -4,9 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/shubham/AndroidStudioProjects/ZarryRPG/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/shubham/AndroidStudioProjects/ZarryRPG/app/src/main/res/layout/area_explore_page.xml" value="0.19010416666666666" />
+        <entry key="..\:/Users/shubham/AndroidStudioProjects/ZarryRPG/app/src/main/res/layout/buy_page.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/shubham/AndroidStudioProjects/ZarryRPG/app/src/main/res/layout/cook_page.xml" value="0.19010416666666666" />
+        <entry key="..\:/Users/shubham/AndroidStudioProjects/ZarryRPG/app/src/main/res/layout/explore_page.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/shubham/AndroidStudioProjects/ZarryRPG/app/src/main/res/layout/head.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/shubham/AndroidStudioProjects/ZarryRPG/app/src/main/res/layout/inventory_page.xml" value="0.19010416666666666" />
+        <entry key="..\:/Users/shubham/AndroidStudioProjects/ZarryRPG/app/src/main/res/layout/inventory_page_item.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/shubham/AndroidStudioProjects/ZarryRPG/app/src/main/res/layout/market_page.xml" value="0.1324435318275154" />
         <entry key="..\:/Users/shubham/AndroidStudioProjects/ZarryRPG/app/src/main/res/layout/muggle_buy_page.xml" value="0.13423517169614985" />
         <entry key="..\:/Users/shubham/AndroidStudioProjects/ZarryRPG/app/src/main/res/layout/muggle_buy_page_item.xml" value="0.19010416666666666" />
@@ -24,8 +28,10 @@
         <entry key="..\:/Users/shubham/AndroidStudioProjects/ZarryRPG/app/src/main/res/layout/muggle_world_page_item.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/shubham/AndroidStudioProjects/ZarryRPG/app/src/main/res/layout/quest_details_page.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/shubham/AndroidStudioProjects/ZarryRPG/app/src/main/res/layout/quest_page.xml" value="0.19010416666666666" />
+        <entry key="..\:/Users/shubham/AndroidStudioProjects/ZarryRPG/app/src/main/res/layout/sell_page.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/shubham/AndroidStudioProjects/ZarryRPG/app/src/main/res/layout/start_page.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/shubham/AndroidStudioProjects/ZarryRPG/app/src/main/res/layout/strat_page.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/shubham/AndroidStudioProjects/ZarryRPG/app/src/main/res/layout/world_page.xml" value="0.19010416666666666" />
       </map>
     </option>
   </component>
