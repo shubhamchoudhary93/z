@@ -25,7 +25,7 @@ interface QuestDatabaseDao {
     @Query("SELECT * from quest_data_table WHERE name = :name")
     fun getByName(name: String): MutableList<Quest>
 
-    @Query("SELECT * FROM quest_data_table WHERE id IN (SELECT MIN(id) FROM quest_data_table GROUP BY name) AND completed = 0")
-    fun getAvailable(): MutableList<Quest>
+    @Query("SELECT * FROM quest_data_table WHERE id IN (SELECT MIN(id) FROM quest_data_table GROUP BY name) AND completed = 0 AND world = :world")
+    fun getAvailable(world: String): MutableList<Quest>
 
 }

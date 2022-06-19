@@ -44,9 +44,9 @@
     </fragment>
     <fragment
         android:id="@+id/muggleCookPageFragment"
-        android:name="com.green.zarryrpg.MuggleCookPageFragment"
+        android:name="com.green.zarryrpg.CookPageFragment"
         android:label="MuggleCookPageFragment"
-        tools:layout="@layout/muggle_cook_page" >
+        tools:layout="@layout/cook_page" >
         <argument
             android:name="muggle"
             app:argType="boolean"
@@ -80,9 +80,9 @@
     </fragment>
     <fragment
         android:id="@+id/muggleBuyPageFragment"
-        android:name="com.green.zarryrpg.MuggleBuyPageFragment"
+        android:name="com.green.zarryrpg.BuyPageFragment"
         android:label="MuggleBuyPageFragment"
-        tools:layout="@layout/muggle_buy_page" >
+        tools:layout="@layout/buy_page" >
         <argument
             android:name="muggle"
             app:argType="boolean"
@@ -90,9 +90,9 @@
     </fragment>
     <fragment
         android:id="@+id/muggleSellPageFragment"
-        android:name="com.green.zarryrpg.MuggleSellPageFragment"
+        android:name="com.green.zarryrpg.SellPageFragment"
         android:label="MuggleSellPageFragment"
-        tools:layout="@layout/muggle_sell_page" >
+        tools:layout="@layout/sell_page" >
         <argument
             android:name="muggle"
             app:argType="boolean"
@@ -100,19 +100,23 @@
     </fragment>
     <fragment
         android:id="@+id/muggleExploreHousePageFragment"
-        android:name="com.green.zarryrpg.MuggleExploreHousePageFragment"
+        android:name="com.green.zarryrpg.AreaExplorePageFragment"
         android:label="MuggleExploreHousePageFragment"
-        tools:layout="@layout/muggle_explore_house_page" >
+        tools:layout="@layout/area_explore_page" >
         <argument
             android:name="muggle"
             app:argType="boolean"
             android:defaultValue="true" />
+        <argument
+            android:name="area"
+            app:argType="integer"
+            android:defaultValue="1" />
     </fragment>
     <fragment
         android:id="@+id/muggleExplorePageFragment"
-        android:name="com.green.zarryrpg.MuggleExplorePageFragment"
+        android:name="com.green.zarryrpg.ExplorePageFragment"
         android:label="MuggleExplorePageFragment"
-        tools:layout="@layout/muggle_explore_page">
+        tools:layout="@layout/explore_page">
         <action
             android:id="@+id/action_muggleExplorePageFragment_to_muggleExploreHousePageFragment"
             app:destination="@id/muggleExploreHousePageFragment" />
@@ -123,9 +127,9 @@
     </fragment>
     <fragment
         android:id="@+id/muggleQuestPageFragment"
-        android:name="com.green.zarryrpg.MuggleQuestPageFragment"
+        android:name="com.green.zarryrpg.QuestPageFragment"
         android:label="MuggleQuestPageFragment"
-        tools:layout="@layout/muggle_quest_page">
+        tools:layout="@layout/quest_page">
         <action
             android:id="@+id/action_muggleQuestPageFragment_to_muggleQuestDetailsPageFragment"
             app:destination="@id/muggleQuestDetailsPageFragment" />
@@ -136,9 +140,9 @@
     </fragment>
     <fragment
         android:id="@+id/muggleQuestDetailsPageFragment"
-        android:name="com.green.zarryrpg.MuggleQuestDetailsPageFragment"
+        android:name="com.green.zarryrpg.QuestDetailsPageFragment"
         android:label="MuggleQuestDetailsPageFragment"
-        tools:layout="@layout/muggle_quest_details_page">
+        tools:layout="@layout/quest_details_page">
         <argument
             android:name="id"
             android:defaultValue="0L"

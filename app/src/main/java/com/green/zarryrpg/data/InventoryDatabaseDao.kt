@@ -17,7 +17,7 @@ interface InventoryDatabaseDao {
     fun get(id: Long): Inventory?
 
     @Query("SELECT * from inventory_data_table WHERE name = :name")
-    fun getName(name: String): Inventory?
+    fun getName(name: String): Inventory
 
     @Query("DELETE FROM inventory_data_table WHERE id = :id")
     fun delete(id: Long)
@@ -34,7 +34,7 @@ interface InventoryDatabaseDao {
     @Query("SELECT corresponding from inventory_data_table WHERE name = :name")
     fun getCorresponding(name: String): String
 
-    @Query("SELECT * from inventory_data_table WHERE quantity>0 AND world = :world AND type = :type")
+    @Query("SELECT * from inventory_data_table WHERE world = :world AND type = :type")
     fun getAvailableByWorldAndType(world: String,type: String): MutableList<Inventory>
 
     @Query("SELECT * from inventory_data_table WHERE quantity>0 AND type != :type")

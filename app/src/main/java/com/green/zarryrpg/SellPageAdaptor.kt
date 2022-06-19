@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.green.zarryrpg.data.Inventory
-import com.green.zarryrpg.databinding.MuggleBuyPageItemBinding
+import com.green.zarryrpg.databinding.SellPageItemBinding
 
-class MuggleBuyPageAdaptor(val clickListener: InventoryListener) :
-    ListAdapter<Inventory, MuggleBuyPageAdaptor.ViewHolder>(InventoryDiffCallback()) {
+class SellPageAdaptor(val clickListener: InventoryListener) :
+    ListAdapter<Inventory, SellPageAdaptor.ViewHolder>(InventoryDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position)!!, clickListener)
@@ -20,7 +20,7 @@ class MuggleBuyPageAdaptor(val clickListener: InventoryListener) :
         return ViewHolder.from(parent)
     }
 
-    class ViewHolder private constructor(val binding: MuggleBuyPageItemBinding) :
+    class ViewHolder private constructor(val binding: SellPageItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(
@@ -35,7 +35,7 @@ class MuggleBuyPageAdaptor(val clickListener: InventoryListener) :
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = MuggleBuyPageItemBinding.inflate(layoutInflater, parent, false)
+                val binding = SellPageItemBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }

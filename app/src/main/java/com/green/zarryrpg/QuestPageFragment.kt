@@ -12,14 +12,15 @@ import androidx.navigation.findNavController
 import com.green.zarryrpg.data.DatabaseCreate
 import com.green.zarryrpg.data.QuestDatabase
 import com.green.zarryrpg.data.QuestDatabaseDao
-import com.green.zarryrpg.databinding.MuggleQuestPageBinding
+import com.green.zarryrpg.databinding.QuestPageBinding
 
-class MuggleQuestPageFragment : Fragment() {
+class QuestPageFragment : Fragment() {
 
-    private lateinit var binding: MuggleQuestPageBinding
+    private lateinit var binding: QuestPageBinding
     private lateinit var questDatabase: QuestDatabaseDao
     private lateinit var data: SharedPreferences
     var user = User()
+    private var muggleBool = true
 
     private fun setScreenData() {
         user = UserFunctions.calculateLevel(user)
@@ -38,7 +39,7 @@ class MuggleQuestPageFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.muggle_quest_page, container, false
+            R.layout.quest_page, container, false
         )
 
         questDatabase = QuestDatabase.getInstance(requireContext()).questDatabaseDao
@@ -57,12 +58,16 @@ class MuggleQuestPageFragment : Fragment() {
 
         setScreenData()
 
-        val list = questDatabase.getAvailable()
+        muggleBool = QuestPageFragmentArgs.fromBundle(requireArguments()).muggle
+        val list = if (muggleBool) {
+            questDatabase.getAvailable("Muggle")
+        } else {
+            questDatabase.getAvailable("Wizard")
+        }
 
-        val adapter = MuggleQuestPageAdaptor(MuggleQuestPageAdaptor.QuestListener {
-
+        val adapter = QuestPageAdaptor(QuestPageAdaptor.QuestListener {
             val actionDetail =
-                MuggleQuestPageFragmentDirections.actionMuggleQuestPageFragmentToMuggleQuestDetailsPageFragment()
+                QuestPageFragmentDirections.actionMuggleQuestPageFragmentToMuggleQuestDetailsPageFragment()
             actionDetail.id = it
             view?.findNavController()?.navigate(actionDetail)
         })
@@ -70,7 +75,11 @@ class MuggleQuestPageFragment : Fragment() {
         binding.list.adapter = adapter
 
         adapter.submitList(list)
-        val title = "Quest"
+        val title = if (muggleBool) {
+            "Muggle Quest"
+        } else {
+            "Wizard Quest"
+        }
         binding.head.title.text = title
         return binding.root
     }

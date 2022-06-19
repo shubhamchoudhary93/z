@@ -89,7 +89,11 @@ class InventoryPageFragment : Fragment() {
         binding.list.adapter = adapter
         adapter.submitList(list)
         setScreenData()
-        val text = "Inventory"
+        val text = if (muggleBool) {
+            "Muggle Inventory"
+        } else {
+            "Wizard Inventory"
+        }
         binding.head.title.text = text
         return binding.root
     }

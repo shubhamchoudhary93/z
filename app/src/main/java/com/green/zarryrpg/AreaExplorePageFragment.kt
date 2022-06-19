@@ -8,19 +8,27 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
+import com.green.zarryrpg.AreaFunctions.calculateFindText
+import com.green.zarryrpg.AreaFunctions.calculateHead
+import com.green.zarryrpg.AreaFunctions.search
 import com.green.zarryrpg.data.DatabaseCreate
-import com.green.zarryrpg.databinding.MuggleExplorePageBinding
+import com.green.zarryrpg.data.InventoryDatabase
+import com.green.zarryrpg.data.InventoryDatabaseDao
+import com.green.zarryrpg.databinding.AreaExplorePageBinding
 
-class MuggleExplorePageFragment : Fragment() {
+class AreaExplorePageFragment : Fragment() {
 
-    private lateinit var binding: MuggleExplorePageBinding
+    private lateinit var binding: AreaExplorePageBinding
     private lateinit var data: SharedPreferences
     private var user = User()
+    private lateinit var inventoryDatabase: InventoryDatabaseDao
     lateinit var mainHandler: Handler
     private var first = true
+    private var muggleBool = true
+    private var area = 1
 
     private val updateStamina = object : Runnable {
         override fun run() {
@@ -54,7 +62,7 @@ class MuggleExplorePageFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.muggle_explore_page, container, false
+            R.layout.area_explore_page, container, false
         )
         data = requireActivity().getSharedPreferences("ZarryRPGData", Context.MODE_PRIVATE)
         user = if (data.contains("User")) {
@@ -69,21 +77,29 @@ class MuggleExplorePageFragment : Fragment() {
         }
 
         mainHandler = Handler(Looper.getMainLooper())
+        muggleBool = AreaExplorePageFragmentArgs.fromBundle(requireArguments()).muggle
+        area = AreaExplorePageFragmentArgs.fromBundle(requireArguments()).area
 
+        inventoryDatabase = InventoryDatabase.getInstance(requireContext()).inventoryDatabaseDao
+        binding.findingLayout.visibility = View.GONE
+
+        binding.canFind.text = calculateFindText(area)
         setListeners()
         setScreenData()
-        val text = "Explore"
+        val text = calculateHead(area)
         binding.head.title.text = text
         return binding.root
     }
 
     private fun setListeners() {
-        binding.houseButton.setOnClickListener {
-            view?.findNavController()
-                ?.navigate(R.id.action_muggleExplorePageFragment_to_muggleExploreHousePageFragment)
-        }
-        binding.groceryButton.setOnClickListener {
-
+        binding.exploreButton.setOnClickListener {
+            if (user.stamina >= 1) {
+                user = search(area, inventoryDatabase, user, binding)
+            } else {
+                Toast.makeText(context, "No more food", Toast.LENGTH_SHORT).show()
+                binding.findingLayout.visibility = View.GONE
+            }
+            setScreenData()
         }
     }
 

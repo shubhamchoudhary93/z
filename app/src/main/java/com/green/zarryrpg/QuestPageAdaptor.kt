@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.green.zarryrpg.data.Quest
-import com.green.zarryrpg.databinding.MuggleQuestPageItemBinding
+import com.green.zarryrpg.databinding.QuestPageItemBinding
 
-class MuggleQuestPageAdaptor(val clickListener: QuestListener) :
-    ListAdapter<Quest, MuggleQuestPageAdaptor.ViewHolder>(QuestDiffCallback()) {
+class QuestPageAdaptor(val clickListener: QuestListener) :
+    ListAdapter<Quest, QuestPageAdaptor.ViewHolder>(QuestDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position)!!, clickListener)
@@ -20,7 +20,7 @@ class MuggleQuestPageAdaptor(val clickListener: QuestListener) :
         return ViewHolder.from(parent)
     }
 
-    class ViewHolder private constructor(val binding: MuggleQuestPageItemBinding) :
+    class ViewHolder private constructor(val binding: QuestPageItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(
@@ -35,7 +35,7 @@ class MuggleQuestPageAdaptor(val clickListener: QuestListener) :
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = MuggleQuestPageItemBinding.inflate(layoutInflater, parent, false)
+                val binding = QuestPageItemBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }

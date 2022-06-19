@@ -8,27 +8,20 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.green.zarryrpg.UserFunctions.calculateLevel
+import androidx.navigation.findNavController
 import com.green.zarryrpg.data.DatabaseCreate
-import com.green.zarryrpg.data.Inventory
-import com.green.zarryrpg.data.InventoryDatabase
-import com.green.zarryrpg.data.InventoryDatabaseDao
-import com.green.zarryrpg.databinding.MuggleBuyPageBinding
-import kotlin.math.floor
+import com.green.zarryrpg.databinding.ExplorePageBinding
 
-class MuggleBuyPageFragment : Fragment() {
+class ExplorePageFragment : Fragment() {
 
-    private lateinit var binding: MuggleBuyPageBinding
-    private lateinit var inventoryDatabase: InventoryDatabaseDao
+    private lateinit var binding: ExplorePageBinding
     private lateinit var data: SharedPreferences
     private var user = User()
-    private var inventorySelected: Inventory = Inventory()
-    private var max = 0
     lateinit var mainHandler: Handler
     private var first = true
+    private var muggleBool = true
 
     private val updateStamina = object : Runnable {
         override fun run() {
@@ -44,8 +37,9 @@ class MuggleBuyPageFragment : Fragment() {
             mainHandler.postDelayed(this, 60000)
         }
     }
+
     private fun setScreenData() {
-        user = calculateLevel(user)
+        user = UserFunctions.calculateLevel(user)
         binding.head.name.text = user.name
         binding.head.money.text = user.money.toString()
         binding.head.gold.text = user.gold.toString()
@@ -61,9 +55,8 @@ class MuggleBuyPageFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.muggle_buy_page, container, false
+            R.layout.explore_page, container, false
         )
-
         data = requireActivity().getSharedPreferences("ZarryRPGData", Context.MODE_PRIVATE)
         user = if (data.contains("User")) {
             UserFunctions.fetchUser(data)
@@ -75,47 +68,43 @@ class MuggleBuyPageFragment : Fragment() {
                 DatabaseCreate.createFirst(requireContext())
             }
         }
-        mainHandler = Handler(Looper.getMainLooper())
 
-        binding.buyButtonLayout.visibility = View.GONE
-        inventoryDatabase = InventoryDatabase.getInstance(requireContext()).inventoryDatabaseDao
-        fetchAdaptor()
+        mainHandler = Handler(Looper.getMainLooper())
+        muggleBool = ExplorePageFragmentArgs.fromBundle(requireArguments()).muggle
+
         setListeners()
         setScreenData()
-        val text = "Market: Buy"
+        binding.houseButton.text = if (muggleBool) {
+            "Muggle Area One"
+        } else {
+            "Wizard Area One"
+        }
+
+        binding.groceryButton.text = if (muggleBool) {
+            "Muggle Area Two"
+        } else {
+            "Wizard Area Two"
+        }
+        val text = if (muggleBool) {
+            "Muggle Explore"
+        } else {
+            "Wizard Explore"
+        }
         binding.head.title.text = text
         return binding.root
     }
 
-    private fun fetchAdaptor() {
-        val list = inventoryDatabase.getAllBuy(user.level, "Muggle")
-
-        val adapter = MuggleBuyPageAdaptor(MuggleBuyPageAdaptor.InventoryListener {
-            binding.buyButtonLayout.visibility = View.VISIBLE
-            inventorySelected = inventoryDatabase.get(it)!!
-            binding.inventorySelected.text = inventorySelected.name
-            max = floor((user.money / inventorySelected.cost).toDouble()).toInt()
-            binding.maxInventory.text = max.toString()
-        })
-
-        binding.list.adapter = adapter
-
-        adapter.submitList(list)
-    }
-
     private fun setListeners() {
-        binding.buyButton.setOnClickListener {
-            val q = binding.quantityBuy.text.toString().toInt()
-            if (q <= max) {
-                val cost = q * inventorySelected.cost
-                if (cost <= user.money)
-                    inventorySelected.quantity += q
-                inventoryDatabase.update(inventorySelected)
-                user.money -= cost
-                binding.buyButtonLayout.visibility = View.GONE
-                fetchAdaptor()
-                setScreenData()
-            } else Toast.makeText(context, "Max quantity can be $max.", Toast.LENGTH_SHORT).show()
+        binding.houseButton.setOnClickListener {
+
+            val actionDetail =
+                ExplorePageFragmentDirections.actionMuggleExplorePageFragmentToMuggleExploreHousePageFragment()
+            actionDetail.muggle = muggleBool
+            actionDetail.area = if (muggleBool) 1 else 2
+            view?.findNavController()?.navigate(actionDetail)
+        }
+        binding.groceryButton.setOnClickListener {
+
         }
     }
 
@@ -140,4 +129,5 @@ class MuggleBuyPageFragment : Fragment() {
         mainHandler.post(updateStamina)
         setScreenData()
     }
+
 }

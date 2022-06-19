@@ -74,7 +74,11 @@ class MarketPageFragment : Fragment() {
 
         setListeners()
         setScreenData()
-        val text = "Market"
+        val text = if (muggleBool) {
+            "Muggle Market"
+        } else {
+            "Wizard Market"
+        }
         binding.head.title.text = text
         return binding.root
     }

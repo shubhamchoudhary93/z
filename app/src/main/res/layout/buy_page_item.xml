@@ -10,7 +10,7 @@
 
         <variable
             name="clickListener"
-            type="com.green.zarryrpg.MuggleSellPageAdaptor.InventoryListener" />
+            type="com.green.zarryrpg.BuyPageAdaptor.InventoryListener" />
     </data>
 
     <LinearLayout
@@ -36,12 +36,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=") Sell: "/>
+            android:text=") Cost: "/>
         <TextView
-            android:id="@+id/sell"
+            android:id="@+id/cost"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            app:sellString="@{inventory}" />
+            app:costString="@{inventory}" />
 
     </LinearLayout>
 </layout>

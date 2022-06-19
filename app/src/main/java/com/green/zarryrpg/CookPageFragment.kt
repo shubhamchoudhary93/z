@@ -16,11 +16,11 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.green.zarryrpg.data.*
-import com.green.zarryrpg.databinding.MuggleCookPageBinding
+import com.green.zarryrpg.databinding.CookPageBinding
 
-class MuggleCookPageFragment : Fragment() {
+class CookPageFragment : Fragment() {
 
-    private lateinit var binding: MuggleCookPageBinding
+    private lateinit var binding: CookPageBinding
     private lateinit var data: SharedPreferences
     var user = User()
     private lateinit var inventoryDatabase: InventoryDatabaseDao
@@ -30,6 +30,7 @@ class MuggleCookPageFragment : Fragment() {
     private var cookSelected = 0
     private lateinit var oldColors: ColorStateList
     private var first = true
+    private var muggleBool = true
 
     private val updateStamina = object : Runnable {
         override fun run() {
@@ -65,7 +66,7 @@ class MuggleCookPageFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.muggle_cook_page, container, false
+            R.layout.cook_page, container, false
         )
         setDATA()
         mainHandler = Handler(Looper.getMainLooper())
@@ -75,11 +76,17 @@ class MuggleCookPageFragment : Fragment() {
             FinishRequirementDatabase.getInstance(requireContext()).finishRequirementDatabaseDao
 
         binding.cookPage.visibility = View.GONE
+        muggleBool = CookPageFragmentArgs.fromBundle(requireArguments()).muggle
+
         setListeners()
         setScreenData()
         oldColors = binding.itemCost.textColors
         setScreenData()
-        val text = "Cook"
+        val text = if (muggleBool) {
+            "Muggle Cook"
+        } else {
+            "Wizard Cook"
+        }
         binding.head.title.text = text
         return binding.root
     }
@@ -131,7 +138,10 @@ class MuggleCookPageFragment : Fragment() {
             when (user.cook[0].status) {
                 0 -> {
                     binding.cookPage.visibility = View.VISIBLE
-                    itemList = inventoryDatabase.getAvailableByWorldAndType("Muggle", "Food")
+                    itemList = if (muggleBool) {
+                        inventoryDatabase.getAvailableByWorldAndType("Muggle", "Food")
+                    } else
+                        inventoryDatabase.getAvailableByWorldAndType("Wizard", "Food")
 
                     val names: MutableList<String> = mutableListOf()
                     var text: String
@@ -179,7 +189,10 @@ class MuggleCookPageFragment : Fragment() {
             when (user.cook[1].status) {
                 0 -> {
                     binding.cookPage.visibility = View.VISIBLE
-                    itemList = inventoryDatabase.getAvailableByWorldAndType("Muggle", "Food")
+                    itemList = if (muggleBool) {
+                        inventoryDatabase.getAvailableByWorldAndType("Muggle", "Food")
+                    } else
+                        inventoryDatabase.getAvailableByWorldAndType("Wizard", "Food")
 
                     val names: MutableList<String> = mutableListOf()
                     var text: String

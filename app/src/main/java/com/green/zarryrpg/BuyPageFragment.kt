@@ -11,19 +11,25 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.green.zarryrpg.UserFunctions.calculateLevel
 import com.green.zarryrpg.data.DatabaseCreate
+import com.green.zarryrpg.data.Inventory
 import com.green.zarryrpg.data.InventoryDatabase
 import com.green.zarryrpg.data.InventoryDatabaseDao
-import com.green.zarryrpg.databinding.MuggleExploreHousePageBinding
+import com.green.zarryrpg.databinding.BuyPageBinding
+import kotlin.math.floor
 
-class MuggleExploreHousePageFragment : Fragment() {
+class BuyPageFragment : Fragment() {
 
-    private lateinit var binding: MuggleExploreHousePageBinding
+    private lateinit var binding: BuyPageBinding
+    private lateinit var inventoryDatabase: InventoryDatabaseDao
     private lateinit var data: SharedPreferences
     private var user = User()
-    private lateinit var inventoryDatabase: InventoryDatabaseDao
+    private var inventorySelected: Inventory = Inventory()
+    private var max = 0
     lateinit var mainHandler: Handler
     private var first = true
+    private var muggleBool = true
 
     private val updateStamina = object : Runnable {
         override fun run() {
@@ -41,7 +47,7 @@ class MuggleExploreHousePageFragment : Fragment() {
     }
 
     private fun setScreenData() {
-        user = UserFunctions.calculateLevel(user)
+        user = calculateLevel(user)
         binding.head.name.text = user.name
         binding.head.money.text = user.money.toString()
         binding.head.gold.text = user.gold.toString()
@@ -57,8 +63,9 @@ class MuggleExploreHousePageFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.muggle_explore_house_page, container, false
+            R.layout.buy_page, container, false
         )
+
         data = requireActivity().getSharedPreferences("ZarryRPGData", Context.MODE_PRIVATE)
         user = if (data.contains("User")) {
             UserFunctions.fetchUser(data)
@@ -70,59 +77,57 @@ class MuggleExploreHousePageFragment : Fragment() {
                 DatabaseCreate.createFirst(requireContext())
             }
         }
-
         mainHandler = Handler(Looper.getMainLooper())
 
-        inventoryDatabase = InventoryDatabase.getInstance(requireContext()).inventoryDatabaseDao
-        binding.findingLayout.visibility = View.GONE
+        muggleBool = BuyPageFragmentArgs.fromBundle(requireArguments()).muggle
 
-        val text1 = "Bread\n Butter\n Flour"
-        binding.canFind.text = text1
+        binding.buyButtonLayout.visibility = View.GONE
+        inventoryDatabase = InventoryDatabase.getInstance(requireContext()).inventoryDatabaseDao
+        fetchAdaptor()
         setListeners()
         setScreenData()
-        val text = "Explore: House"
+        val text = if (muggleBool) {
+            "Muggle Market: Buy"
+        } else {
+            "Wizard Market: Buy"
+        }
         binding.head.title.text = text
         return binding.root
     }
 
-    private fun setListeners() {
-        binding.exploreButton.setOnClickListener {
-            if (user.stamina >= 1) {
-                val itemList = arrayOf(
-                    inventoryDatabase.getName("Bread"),
-                    inventoryDatabase.getName("Butter"),
-                    inventoryDatabase.getName("Flour"),
-                    null,
-                    null,
-                    null,
-                    null,
-                    null
-                )
+    private fun fetchAdaptor() {
+        val list = if (muggleBool) {
+            inventoryDatabase.getAllBuy(user.level, "Muggle")
+        } else {
+            inventoryDatabase.getAllBuy(user.level, "Wizard")
+        }
 
-                val itemExplored = itemList[(itemList.indices).random()]
-                val numberOfItem = (0..2).random()
-                user.stamina--
-                binding.findingLayout.visibility = View.VISIBLE
-                if (itemExplored != null) {
-                    if (numberOfItem != 0) {
-                        val text = numberOfItem.toString() + itemExplored.name
-                        binding.finding.text = text
-                        itemExplored.quantity += numberOfItem
-                        inventoryDatabase.update(itemExplored)
-                        user.xp += itemExplored.xp
-                    } else {
-                        val nothing = "nothing"
-                        binding.finding.text = nothing
-                    }
-                } else {
-                    val nothing = "nothing"
-                    binding.finding.text = nothing
-                }
-            } else {
-                Toast.makeText(context, "No more food", Toast.LENGTH_SHORT).show()
-                binding.findingLayout.visibility = View.GONE
-            }
-            setScreenData()
+        val adapter = BuyPageAdaptor(BuyPageAdaptor.InventoryListener {
+            binding.buyButtonLayout.visibility = View.VISIBLE
+            inventorySelected = inventoryDatabase.get(it)!!
+            binding.inventorySelected.text = inventorySelected.name
+            max = floor((user.money / inventorySelected.cost).toDouble()).toInt()
+            binding.maxInventory.text = max.toString()
+        })
+
+        binding.list.adapter = adapter
+
+        adapter.submitList(list)
+    }
+
+    private fun setListeners() {
+        binding.buyButton.setOnClickListener {
+            val q = binding.quantityBuy.text.toString().toInt()
+            if (q <= max) {
+                val cost = q * inventorySelected.cost
+                if (cost <= user.money)
+                    inventorySelected.quantity += q
+                inventoryDatabase.update(inventorySelected)
+                user.money -= cost
+                binding.buyButtonLayout.visibility = View.GONE
+                fetchAdaptor()
+                setScreenData()
+            } else Toast.makeText(context, "Max quantity can be $max.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -147,5 +152,4 @@ class MuggleExploreHousePageFragment : Fragment() {
         mainHandler.post(updateStamina)
         setScreenData()
     }
-
 }

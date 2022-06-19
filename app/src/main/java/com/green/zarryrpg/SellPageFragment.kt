@@ -15,11 +15,11 @@ import com.green.zarryrpg.data.DatabaseCreate
 import com.green.zarryrpg.data.Inventory
 import com.green.zarryrpg.data.InventoryDatabase
 import com.green.zarryrpg.data.InventoryDatabaseDao
-import com.green.zarryrpg.databinding.MuggleSellPageBinding
+import com.green.zarryrpg.databinding.SellPageBinding
 
-class MuggleSellPageFragment : Fragment() {
+class SellPageFragment : Fragment() {
 
-    private lateinit var binding: MuggleSellPageBinding
+    private lateinit var binding: SellPageBinding
     private lateinit var inventoryDatabase: InventoryDatabaseDao
     private lateinit var data: SharedPreferences
     private var user = User()
@@ -27,6 +27,7 @@ class MuggleSellPageFragment : Fragment() {
     private var max = 0
     lateinit var mainHandler: Handler
     private var first = true
+    private var muggleBool = true
 
     private val updateStamina = object : Runnable {
         override fun run() {
@@ -42,6 +43,7 @@ class MuggleSellPageFragment : Fragment() {
             mainHandler.postDelayed(this, 60000)
         }
     }
+
     private fun setScreenData() {
         user = UserFunctions.calculateLevel(user)
         binding.head.name.text = user.name
@@ -59,7 +61,7 @@ class MuggleSellPageFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.muggle_sell_page, container, false
+            R.layout.sell_page, container, false
         )
         data = requireActivity().getSharedPreferences("ZarryRPGData", Context.MODE_PRIVATE)
         user = if (data.contains("User")) {
@@ -74,20 +76,29 @@ class MuggleSellPageFragment : Fragment() {
         }
         mainHandler = Handler(Looper.getMainLooper())
 
+        muggleBool = SellPageFragmentArgs.fromBundle(requireArguments()).muggle
         binding.sellButtonLayout.visibility = View.GONE
         inventoryDatabase = InventoryDatabase.getInstance(requireContext()).inventoryDatabaseDao
         fetchAdaptor()
         setListeners()
         setScreenData()
-        val text = "Market: Sell"
+        val text = if (muggleBool) {
+            "Muggle Market: Sell"
+        } else {
+            "Wizard Market: Sell"
+        }
         binding.head.title.text = text
         return binding.root
     }
 
     private fun fetchAdaptor() {
-        val list = inventoryDatabase.getAllSell("Muggle")
+        val list = if (muggleBool) {
+            inventoryDatabase.getAllSell("Muggle")
+        } else {
+            inventoryDatabase.getAllSell("Wizard")
+        }
 
-        val adapter = MuggleSellPageAdaptor(MuggleSellPageAdaptor.InventoryListener {
+        val adapter = SellPageAdaptor(SellPageAdaptor.InventoryListener {
             binding.sellButtonLayout.visibility = View.VISIBLE
             inventorySelected = inventoryDatabase.get(it)!!
             binding.inventorySelected.text = inventorySelected.name

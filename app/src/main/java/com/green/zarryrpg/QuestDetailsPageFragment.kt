@@ -12,11 +12,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.green.zarryrpg.data.*
-import com.green.zarryrpg.databinding.MuggleQuestDetailsPageBinding
+import com.green.zarryrpg.databinding.QuestDetailsPageBinding
 
-class MuggleQuestDetailsPageFragment : Fragment() {
+class QuestDetailsPageFragment : Fragment() {
 
-    private lateinit var binding: MuggleQuestDetailsPageBinding
+    private lateinit var binding: QuestDetailsPageBinding
     private lateinit var questDatabase: QuestDatabaseDao
     private lateinit var inventoryDatabase: InventoryDatabaseDao
     private lateinit var questRewardDatabase: QuestRewardDatabaseDao
@@ -40,7 +40,7 @@ class MuggleQuestDetailsPageFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.muggle_quest_details_page, container, false
+            R.layout.quest_details_page, container, false
         )
 
         questDatabase = QuestDatabase.getInstance(requireContext()).questDatabaseDao
@@ -62,7 +62,7 @@ class MuggleQuestDetailsPageFragment : Fragment() {
 
         setScreenData()
 
-        val id = MuggleQuestDetailsPageFragmentArgs.fromBundle(requireArguments()).id
+        val id = QuestDetailsPageFragmentArgs.fromBundle(requireArguments()).id
         val quest = questDatabase.get(id)
         binding.name.text = quest?.name
         binding.detail.text = quest?.detail

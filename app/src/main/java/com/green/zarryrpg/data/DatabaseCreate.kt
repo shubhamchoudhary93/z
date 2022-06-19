@@ -117,9 +117,9 @@ object DatabaseCreate {
 
         inventoryDatabase.insert(
             Inventory(
-                0,
+                2,
                 "Broom",
-                "Product",
+                "Food",
                 "Wizard",
                 0,
                 10,
@@ -136,9 +136,9 @@ object DatabaseCreate {
         )
         inventoryDatabase.insert(
             Inventory(
-                1,
+                3,
                 "Hat",
-                "Product",
+                "Food",
                 "Wizard",
                 0,
                 10,
@@ -156,7 +156,7 @@ object DatabaseCreate {
 
         inventoryDatabase.insert(
             Inventory(
-                1000,
+                1003,
                 "Wood",
                 "Raw",
                 "Wizard",
@@ -175,7 +175,7 @@ object DatabaseCreate {
         )
         inventoryDatabase.insert(
             Inventory(
-                1001,
+                1004,
                 "Straw",
                 "Raw",
                 "Wizard",
@@ -194,7 +194,7 @@ object DatabaseCreate {
         )
         inventoryDatabase.insert(
             Inventory(
-                1002,
+                1005,
                 "Cloth",
                 "Raw",
                 "Wizard",
@@ -223,24 +223,24 @@ object DatabaseCreate {
         finishRequirementDatabase.insert(FinishRequirement(0, "Hat", "Straw", 1))
 
 
-        questDatabase.insert(Quest(0, "Quest 1", "Need Broom", "Broom", 5, "", 0, 0, "Wizard"))
-        questDatabase.insert(Quest(0, "Quest 2", "Need Broom", "Straw", 10, "", 1, 0, "Wizard"))
-        questDatabase.insert(Quest(0, "Quest 2", "Need Hat", "Hat", 10, "", 1, 0, "Wizard"))
-        questDatabase.insert(Quest(0, "Quest 3", "Need Straw", "Straw", 5, "", 0, 0, "Wizard"))
+        questDatabase.insert(Quest(0, "Quest 1 Wizard", "Need Broom", "Broom", 5, "", 0, 0, "Wizard"))
+        questDatabase.insert(Quest(0, "Quest 2 Wizard", "Need Broom", "Straw", 10, "", 1, 0, "Wizard"))
+        questDatabase.insert(Quest(0, "Quest 2 Wizard", "Need Hat", "Hat", 10, "", 1, 0, "Wizard"))
+        questDatabase.insert(Quest(0, "Quest 3 Wizard", "Need Straw", "Straw", 5, "", 0, 0, "Wizard"))
 
-        questRewardDatabase.insert(QuestReward(0, "Quest 1", "Money", 100))
-        questRewardDatabase.insert(QuestReward(0, "Quest 2", "Straw", 10))
-        questRewardDatabase.insert(QuestReward(0, "Quest 3", "Money", 400))
-        questRewardDatabase.insert(QuestReward(0, "Quest 3", "Gold", 10))
+        questRewardDatabase.insert(QuestReward(0, "Quest 1 Wizard", "Money", 100))
+        questRewardDatabase.insert(QuestReward(0, "Quest 2 Wizard", "Straw", 10))
+        questRewardDatabase.insert(QuestReward(0, "Quest 3 Wizard", "Money", 400))
+        questRewardDatabase.insert(QuestReward(0, "Quest 3 Wizard", "Gold", 10))
 
-        questDatabase.insert(Quest(0, "Quest 1", "Need Sandwich", "Sandwich", 5, "", 0, 0, "Muggle"))
-        questDatabase.insert(Quest(0, "Quest 2", "Need Material", "Butter", 10, "", 1, 0, "Muggle"))
-        questDatabase.insert(Quest(0, "Quest 2", "Need Material", "Flour", 10, "", 1, 0, "Muggle"))
-        questDatabase.insert(Quest(0, "Quest 3", "Need Pancake", "Pancake", 5, "", 0, 0, "Muggle"))
+        questDatabase.insert(Quest(0, "Quest 1 Muggle", "Need Sandwich", "Sandwich", 5, "", 0, 0, "Muggle"))
+        questDatabase.insert(Quest(0, "Quest 2 Muggle", "Need Material", "Butter", 10, "", 1, 0, "Muggle"))
+        questDatabase.insert(Quest(0, "Quest 2 Muggle", "Need Material", "Flour", 10, "", 1, 0, "Muggle"))
+        questDatabase.insert(Quest(0, "Quest 3 Muggle", "Need Pancake", "Pancake", 5, "", 0, 0, "Muggle"))
 
-        questRewardDatabase.insert(QuestReward(0, "Quest 1", "Money", 100))
-        questRewardDatabase.insert(QuestReward(0, "Quest 2", "Sandwich", 10))
-        questRewardDatabase.insert(QuestReward(0, "Quest 3", "Money", 400))
-        questRewardDatabase.insert(QuestReward(0, "Quest 3", "Gold", 10))
+        questRewardDatabase.insert(QuestReward(0, "Quest 1 Muggle", "Money", 100))
+        questRewardDatabase.insert(QuestReward(0, "Quest 2 Muggle", "Sandwich", 10))
+        questRewardDatabase.insert(QuestReward(0, "Quest 3 Muggle", "Money", 400))
+        questRewardDatabase.insert(QuestReward(0, "Quest 3 Muggle", "Gold", 10))
     }
 }
